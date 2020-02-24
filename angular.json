@@ -120,6 +120,41 @@
           }
         }
       }
+    },
+    "monkey-charts": {
+      "projectType": "library",
+      "root": "projects/monkey-charts",
+      "sourceRoot": "projects/monkey-charts/src",
+      "prefix": "mc",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/monkey-charts/tsconfig.lib.json",
+            "project": "projects/monkey-charts/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/monkey-charts/src/test.ts",
+            "tsConfig": "projects/monkey-charts/tsconfig.spec.json",
+            "karmaConfig": "projects/monkey-charts/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/monkey-charts/tsconfig.lib.json",
+              "projects/monkey-charts/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "monkey-charts-ws"
 }

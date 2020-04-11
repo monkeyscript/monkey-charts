@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms'
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { MonkeyChartsModule } from '../../projects/monkey-charts/src/lib/monkey-charts.module'
@@ -13,7 +13,7 @@ import { MonkeyChartsModule } from '../../projects/monkey-charts/src/lib/monkey-
   imports: [
     BrowserModule,
     MonkeyChartsModule,
-    AppRoutingModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

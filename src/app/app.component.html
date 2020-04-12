@@ -38,9 +38,11 @@
           <div class="form-group">
             <select 
               name="colorScheme" 
-              [(ngModel)]="colorScheme"
+              [(ngModel)]="colorScheme.name"
+              (change)="onColorSchemeChange()"
               class="custom-select custom-select-sm">
               <option value disabled>Color Scheme</option>
+              <option value="{{scheme.name}}" *ngFor="let scheme of colorSchemes">{{scheme.name}}</option>
             </select>
           </div>
   
@@ -58,6 +60,7 @@
                 <mc-vertical-bar
                   [datum]="datum"
                   [height]="heightInput"
+                  [colorScheme]="colorScheme.domain"
                 ></mc-vertical-bar>
               </div>
 
@@ -68,6 +71,8 @@
           <div class="text-secondary text-sm text-center">All charts are responsive. | id for each | ngOnchanges | default values</div>
           <div class="text-secondary text-sm">
             {{chartType}}
+            <br>
+            {{colorScheme|json}}
             <br>
             {{datum|json}}
           </div>

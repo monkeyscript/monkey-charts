@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VerticalBarData } from './data/vertical-bar';
+import { ColorSchemes } from './utils/color-schemes';
 
 @Component({
   selector: 'app-root',
@@ -10,24 +11,38 @@ export class AppComponent implements OnInit {
 
   title = 'monkey-charts-ws';
 
-  chartType     : string;
-  colorScheme   : string;
+  chartType     : string;   
+  colorScheme   : {
+    name      : string,
+    domain    : string[]
+  }
   heightInput   : number;
   datum         : any;          
+
+  colorSchemes  : {
+    name      : string,
+    domain    : string[]
+  }[]
 
   ngOnInit() {
 
     // Initialize params 
     this.chartType = 'VERTICAL_BAR';
-    this.colorScheme = '';
+    this.colorScheme = {
+      name : 'Yasha',
+      domain : []
+    };
     this.heightInput = 300;
+    this.colorSchemes = ColorSchemes;
 
     this.onChartTypeChange();
+    this.onColorSchemeChange();
 
   }
 
   // 
   // On changing a chart type
+  //
   onChartTypeChange(){
     switch (this.chartType) {
 
@@ -61,6 +76,15 @@ export class AppComponent implements OnInit {
         break;
 
     }
+  }
+
+  //
+  // On changing color scheme
+  //
+  onColorSchemeChange(){
+    this.colorScheme.domain = this.colorSchemes.find(
+      s => s.name === this.colorScheme.name
+    ).domain;
   }
 
 }

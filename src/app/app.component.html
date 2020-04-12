@@ -14,6 +14,8 @@
           <div class="form-group">
             <select 
               name="chartType" 
+              [(ngModel)]="chartType"
+              (change)="onChartTypeChange()"
               class="custom-select custom-select-sm">
               <option value disabled>Chart Type</option>
               <option value="LINE">Line Chart</option>
@@ -25,8 +27,18 @@
           </div>
   
           <div class="form-group">
+            <input 
+              name="heightInput" 
+              [(ngModel)]="heightInput"
+              class="form-control form-control-sm"
+              placeholder="Chart height"
+              min="0">
+          </div>
+
+          <div class="form-group">
             <select 
               name="colorScheme" 
+              [(ngModel)]="colorScheme"
               class="custom-select custom-select-sm">
               <option value disabled>Color Scheme</option>
             </select>
@@ -40,12 +52,24 @@
         <div class="container">
           <div class="row m-0">
             <div class="col-md-2"></div>
-            <div class="col-md-8 bg-light">
-              <h1>Preview</h1>
-              <br>
-              <div class="text-secondary text-sm text-center">All charts are responsive.</div>
+            <div class="col-md-8 p-0 bg-light">
+
+              <div *ngIf="chartType=='VERTICAL_BAR'">
+                <mc-vertical-bar
+                  [datum]="datum"
+                  [height]="heightInput"
+                ></mc-vertical-bar>
+              </div>
+
             </div>
             <div class="col-md-2"></div>
+          </div>
+          <br>
+          <div class="text-secondary text-sm text-center">All charts are responsive. | id for each | ngOnchanges | default values</div>
+          <div class="text-secondary text-sm">
+            {{chartType}}
+            <br>
+            {{datum|json}}
           </div>
         </div>
       </div>

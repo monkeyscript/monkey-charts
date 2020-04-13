@@ -22,6 +22,11 @@ export class VerticalBarComponent implements AfterViewInit {
   constructor() { }
 
   ngAfterViewInit(){
+
+    // Validate inputs
+    this.height = this.height<0 ? 0 : this.height;
+    this.colorScheme = this.colorScheme.length==0 ? ['#78d0d3'] : this.colorScheme;
+
     this.draw();
   }
 
@@ -37,8 +42,9 @@ export class VerticalBarComponent implements AfterViewInit {
   //
   private draw(){
 
-    // Remove existing svg
+    // Remove existing svg and tooltips
     d3.select('svg').remove();
+    d3.select('.vertical-bar-chart-tooltip').remove();
 
     // Get element reference, height and width
     const element = this.chartContainer.nativeElement;
@@ -50,9 +56,11 @@ export class VerticalBarComponent implements AfterViewInit {
                   .append('svg')
                   .attr('width', width)
                   .attr('height', height);
-    
-    // const contentWidth = element.offsetWidth - this.margin.left - this.margin.right;
-    // const contentHeight = element.offsetHeight - this.margin.top - this.margin.bottom;
+
+    // Add tooltip
+    var tooltip = d3.select(element)
+                    .append("div")
+                    .attr("class", "vertical-bar-chart-tooltip");
 
     // Define x axis 
     const xAxis = d3.scaleBand()
@@ -65,18 +73,37 @@ export class VerticalBarComponent implements AfterViewInit {
                     .rangeRound([height, 0])
                     .domain([0, d3.max(this.datum, d => d.value)]);
 
+    // Append group 
     const g = svg.append('g');
-                // .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
 
     // Append bars
     g.selectAll('.bar')
       .data(this.datum)
-      .enter().append('rect')
+      .enter()
+      .append('rect')
       .attr('class', 'bar')
       .attr('x', d => xAxis(d.name))
       .attr('y', d => yAxis(d.value))
+      .attr('rx', 4)
+      .attr('ry', 4)
       .attr('width', xAxis.bandwidth())
-      .attr('height', d => height - yAxis(d.value));
+      .attr('height', d => height - yAxis(d.value))
+      .attr('fill', (d, i )=> {
+        return this.colorScheme[i % this.colorScheme.length];
+      })
+      .on("mousemove", function(d){
+        // Check for custom tooltip 
+        let tooltipText = d.tooltip ? d.tooltip : d.name + " : " + d.value;
+        tooltip
+          .style("left", d3.event.x + "px")
+          .style("top", d3.event.y + "px")
+          .style("display", "inline-block")
+          .html(tooltipText);
+      })
+      .on("mouseout", function(d){ 
+        tooltip
+          .style("display", "none");
+      });
 
   }
 

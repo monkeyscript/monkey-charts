@@ -5,3 +5,16 @@
 .bar:hover {
   opacity: 0.8;
 }
+
+.vertical-bar-chart-tooltip {
+  position: absolute;
+  display: none;
+  background-color: #222222;
+  color: white;
+  opacity: 0.8;
+  border-radius: 4px;
+  padding: 8px 12px 8px 12px;
+  text-align: center;
+  font-size: small;
+  white-space: nowrap;
+}

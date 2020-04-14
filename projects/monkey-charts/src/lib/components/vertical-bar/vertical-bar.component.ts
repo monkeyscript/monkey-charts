@@ -11,6 +11,7 @@ export class VerticalBarComponent implements AfterViewInit {
 
   @ViewChild('mcVerticalBar', {static:false}) private chartContainer: ElementRef;
 
+  @Input('id') id                     : string;
   @Input('height') height             : number;
   @Input('colorScheme') colorScheme   : string[];
   @Input('datum') datum               : {
@@ -24,16 +25,18 @@ export class VerticalBarComponent implements AfterViewInit {
   ngAfterViewInit(){
 
     // Validate inputs
-    this.height = this.height<0 ? 0 : this.height;
-    this.colorScheme = this.colorScheme.length==0 ? ['#78d0d3'] : this.colorScheme;
-
+    this.height = this.height ? this.height : 300;
+    this.height = this.height<0 ? 300 : this.height;
+    this.colorScheme = this.colorScheme ? this.colorScheme : ['#78d0d3'];
+    this.datum = this.datum ? this.datum : [];
+    
     this.draw();
   }
 
   ngOnChanges(){
     // Check if view init 
     if(this.chartContainer){
-      this.draw();
+      this.ngAfterViewInit();
     }
   }
 
@@ -43,8 +46,8 @@ export class VerticalBarComponent implements AfterViewInit {
   private draw(){
 
     // Remove existing svg and tooltips
-    d3.select('svg').remove();
-    d3.select('.vertical-bar-chart-tooltip').remove();
+    d3.select('#mcVerticalBar_'+this.id).select('svg').remove();
+    d3.select('#mcVerticalBar_'+this.id).select('.vertical-bar-chart-tooltip').remove();
 
     // Get element reference, height and width
     const element = this.chartContainer.nativeElement;
@@ -75,7 +78,7 @@ export class VerticalBarComponent implements AfterViewInit {
 
     // Append group 
     const g = svg.append('g');
-
+    
     // Append bars
     g.selectAll('.bar')
       .data(this.datum)
@@ -94,11 +97,11 @@ export class VerticalBarComponent implements AfterViewInit {
       .on("mousemove", function(d){
         // Check for custom tooltip 
         let tooltipText = d.tooltip ? d.tooltip : d.name + " : " + d.value;
-        tooltip
-          .style("left", d3.event.x + "px")
-          .style("top", d3.event.y + "px")
-          .style("display", "inline-block")
-          .html(tooltipText);
+        // tooltip
+        //   .style("left", d3.event.x + "px")
+        //   .style("top", d3.event.y + "px")
+        //   .style("display", "inline-block")
+        //   .html(tooltipText);
       })
       .on("mouseout", function(d){ 
         tooltip

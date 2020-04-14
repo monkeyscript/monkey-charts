@@ -45,6 +45,8 @@
               <option value="{{scheme.name}}" *ngFor="let scheme of colorSchemes">{{scheme.name}}</option>
             </select>
           </div>
+
+          <pre class="text-secondary rounded border p-3 bg-light" style="max-height: 180px; font-size: x-small;">{{datum|json}}</pre>
   
         </div>
         <br>
@@ -58,6 +60,7 @@
 
               <div *ngIf="chartType=='VERTICAL_BAR'">
                 <mc-vertical-bar
+                  [id]="'sample'"
                   [datum]="datum"
                   [height]="heightInput"
                   [colorScheme]="colorScheme.domain"

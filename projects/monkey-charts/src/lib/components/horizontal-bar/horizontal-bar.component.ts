@@ -112,7 +112,7 @@ export class HorizontalBarComponent implements AfterViewInit {
 
   //
   // On window resizing, redraw chart
-  onResize() {
+  onResize(event:any) {
     this.draw();
   }
 

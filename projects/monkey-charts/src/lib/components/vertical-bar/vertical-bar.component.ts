@@ -112,7 +112,7 @@ export class VerticalBarComponent implements AfterViewInit {
 
   //
   // On window resizing, redraw chart
-  onResize() {
+  onResize(event:any) {
     this.draw();
   }
 

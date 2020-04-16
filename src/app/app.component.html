@@ -60,11 +60,20 @@
 
               <div *ngIf="chartType=='VERTICAL_BAR'">
                 <mc-vertical-bar
-                  [id]="'sample'"
+                  [id]="'sample_vb'"
                   [datum]="datum"
                   [height]="heightInput"
                   [colorScheme]="colorScheme.domain"
                 ></mc-vertical-bar>
+              </div>
+
+              <div *ngIf="chartType=='HORIZONTAL_BAR'">
+                <mc-horizontal-bar
+                  [id]="'sample_hb'"
+                  [datum]="datum"
+                  [height]="heightInput"
+                  [colorScheme]="colorScheme.domain"
+                ></mc-horizontal-bar>
               </div>
 
             </div>

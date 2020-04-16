@@ -1,4 +1,4 @@
-export const VerticalBarData: {
+export const BarChartData: {
   name: string,
   value: number,
   tooltip ? : string
@@ -16,11 +16,11 @@ export const VerticalBarData: {
   },
   {
     "name": "Iceland",
-    "value": 362,
+    "value": 302,
   },
   {
     "name": "Spain",
-    "value": 330,
+    "value": 380,
   },
   {
     "name": "Italy",

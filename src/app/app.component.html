@@ -76,6 +76,15 @@
                 ></mc-horizontal-bar>
               </div>
 
+              <div *ngIf="chartType=='PIE'">
+                <mc-pie
+                  [id]="'sample_pie'"
+                  [datum]="datum"
+                  [height]="heightInput"
+                  [colorScheme]="colorScheme.domain"
+                ></mc-pie>
+              </div>
+
             </div>
             <div class="col-md-2"></div>
           </div>

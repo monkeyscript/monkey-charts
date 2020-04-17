@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BarChartData } from './data/bar-chart';
+import { PieChartData } from './data/pie-chart';
 import { ColorSchemes } from './utils/color-schemes';
 
 @Component({
@@ -27,7 +28,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
 
     // Initialize params 
-    this.chartType = 'HORIZONTAL_BAR';
+    this.chartType = 'PIE';
     this.colorScheme = {
       name : 'Yasha',
       domain : []
@@ -62,9 +63,9 @@ export class AppComponent implements OnInit {
         break;
       
       // Pie chart
-      // case 'PIE':
-      //   this.datum = VerticalBarData;
-      //   break;
+      case 'PIE':
+        this.datum = PieChartData;
+        break;
 
       // Linear gauge
       // case 'LINEAR_GAUGE':

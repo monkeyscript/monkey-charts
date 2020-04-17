@@ -1,13 +1,13 @@
-.bar {
+.arc {
   opacity: 1;
 }
 
-.bar:hover {
+.arc:hover {
   opacity: 0.8;
   cursor: pointer;
 }
 
-.vertical-bar-chart-tooltip {
+.pie-chart-tooltip {
   position: absolute;
   display: none;
   background-color: #222222;

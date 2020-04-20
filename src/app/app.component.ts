@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
 
     // Initialize params 
-    this.chartType = 'LINEAR_GAUGE';
+    this.chartType = 'VERTICAL_BAR';
     this.colorScheme = {
       name : 'Yasha',
       domain : []

@@ -12,6 +12,5 @@ Monkey charts is minimal implementation of charts using d3.js for Angular.
 
 ## Todo
 
-- Linear gauge
 - Advanced customization (margin, maxima, minima)
 - Tooltip positioning

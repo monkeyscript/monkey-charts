@@ -36,7 +36,6 @@ export class AppComponent implements OnInit {
       name : 'Yasha',
       domain : []
     };
-    this.heightInput = 300;
     this.colorSchemes = ColorSchemes;
 
     this.onChartTypeChange();
@@ -53,26 +52,31 @@ export class AppComponent implements OnInit {
       // Line chart
       case 'LINE':
         this.datum = LineChartData;
+        this.heightInput = 300;
         break;
         
       // Vertical bar chart
       case 'VERTICAL_BAR':
         this.datum = BarChartData;
+        this.heightInput = 300;
         break;
       
       // Horizontal bar chart
       case 'HORIZONTAL_BAR':
         this.datum = BarChartData;
+        this.heightInput = 300;
         break;
       
       // Pie chart
       case 'PIE':
         this.datum = PieChartData;
+        this.heightInput = 300;
         break;
 
       // Linear gauge
       case 'LINEAR_GAUGE':
         this.datum = LinearGaugeData;
+        this.heightInput = 60;
         break;
 
       default:

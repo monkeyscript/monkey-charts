@@ -93,7 +93,7 @@ export class LineComponent implements AfterViewInit {
     g .append("path")
       .datum(this.datum)
       .attr("fill", this.colorScheme[0])
-      .attr("fill-opacity", .1)
+      .attr("fill-opacity", .2)
       .attr("stroke", "none")
       .attr("d",  d3.area<any>()
                     .x(function(d) { return xAxis(d.name) })

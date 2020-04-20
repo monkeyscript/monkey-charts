@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BarChartData } from './data/bar-chart';
 import { PieChartData } from './data/pie-chart';
+import { LineChartData } from './data/line-chart';
+import { LinearGaugeData } from './data/linear-gauge';
 import { ColorSchemes } from './utils/color-schemes';
 
 @Component({
@@ -18,8 +20,9 @@ export class AppComponent implements OnInit {
     domain    : string[]
   }
   heightInput   : number;
-  datum         : any;          
+  datum         : any;     
 
+  // Utils 
   colorSchemes  : {
     name      : string,
     domain    : string[]
@@ -28,7 +31,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
 
     // Initialize params 
-    this.chartType = 'PIE';
+    this.chartType = 'LINEAR_GAUGE';
     this.colorScheme = {
       name : 'Yasha',
       domain : []
@@ -48,9 +51,9 @@ export class AppComponent implements OnInit {
     switch (this.chartType) {
 
       // Line chart
-      // case 'LINE':
-      //   this.datum = VerticalBarData;
-      //   break;
+      case 'LINE':
+        this.datum = LineChartData;
+        break;
         
       // Vertical bar chart
       case 'VERTICAL_BAR':
@@ -68,9 +71,9 @@ export class AppComponent implements OnInit {
         break;
 
       // Linear gauge
-      // case 'LINEAR_GAUGE':
-      //   this.datum = VerticalBarData;
-      //   break;
+      case 'LINEAR_GAUGE':
+        this.datum = LinearGaugeData;
+        break;
 
       default:
         this.datum = [];

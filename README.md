@@ -4,17 +4,14 @@ Monkey charts is minimal implementation of charts using d3.js for Angular.
 
 ## Chart Types
 
-- Line
 - Vertical Bar
 - Horizontal Bar
+- Line
 - Pie
 - Linear Gauge
 
 ## Todo
 
-- Line chart
 - Linear gauge
-- Verify change detection
-- Default values for inputs
+- Advanced customization (margin, maxima, minima)
 - Tooltip positioning
-- Wiki

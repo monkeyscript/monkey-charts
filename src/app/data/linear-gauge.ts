@@ -1,7 +1,7 @@
 export const LinearGaugeData: {
-  value: number,
+  value: string,
   maxima: number
 } = {
-  value: 56,
+  value: '56',
   maxima: 100
 }

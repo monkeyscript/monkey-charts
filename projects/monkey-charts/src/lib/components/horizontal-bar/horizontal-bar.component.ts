@@ -94,16 +94,16 @@ export class HorizontalBarComponent implements AfterViewInit {
       .attr('fill', (d, i )=> {
         return this.colorScheme[i % this.colorScheme.length];
       })
-      .on("mousemove", function(d){
+      .on("mousemove", (d) => {
         // Check for custom tooltip 
-        let tooltipText = d.tooltip ? d.tooltip : d.name + " : " + d.value;
-        // tooltip
-        //   .style("left", d3.event.x + "px")
-        //   .style("top", d3.event.y + "px")
-        //   .style("display", "inline-block")
-        //   .html(tooltipText);
+        let tooltipText = d.tooltip ? d.tooltip : `${d.name}: ${d.value}`;
+        tooltip
+          .style("left", `${d3.event.offsetX}px`)
+          .style("top", `${d3.event.offsetY}px`)
+          .style("display", "inline-block")
+          .html(tooltipText);
       })
-      .on("mouseout", function(d){ 
+      .on("mouseout", () => { 
         tooltip
           .style("display", "none");
       });

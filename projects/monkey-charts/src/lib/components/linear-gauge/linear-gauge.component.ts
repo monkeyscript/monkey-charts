@@ -15,9 +15,9 @@ export class LinearGaugeComponent implements AfterViewInit {
   @Input('height') height             : number;
   @Input('colorScheme') colorScheme   : string[];
   @Input('datum') datum               : {
-    value   : number,
+    value   : string,
     maxima  : number,
-    tooltip   ?:  string
+    tooltip   ?: string
   }
 
   constructor() { }
@@ -29,7 +29,7 @@ export class LinearGaugeComponent implements AfterViewInit {
     this.height = this.height<0 ? 300 : this.height;
     this.colorScheme = this.colorScheme ? this.colorScheme : ['#78d0d3'];
     this.datum = this.datum ? this.datum : {
-      value : 0,
+      value : '0',
       maxima : 100
     };
     
@@ -77,7 +77,7 @@ export class LinearGaugeComponent implements AfterViewInit {
     const g = svg.append('g');
     
     // Append background rect
-    g .append('rect')
+    g.append('rect')
       .attr('x', 0)
       .attr('y', 0)
       .attr('rx', 4)
@@ -87,33 +87,33 @@ export class LinearGaugeComponent implements AfterViewInit {
       .attr('fill', () => {
         return this.colorScheme[0];
       })
-      .attr('fill-opacity', 0.2)
-      .on("mousemove", () => {
-        // Check for custom tooltip 
-        let tooltipText = this.datum.tooltip ? this.datum.tooltip : this.datum.value;
-        // tooltip
-        //   .style("left", d3.event.x + "px")
-        //   .style("top", d3.event.y + "px")
-        //   .style("display", "inline-block")
-        //   .html(tooltipText);
-      })
-      .on("mouseout", function(d){ 
-        tooltip
-          .style("display", "none");
-      });
+      .attr('fill-opacity', 0.2);
 
     // Append primary rect 
-    g .append('rect')
+    g.append('rect')
       .attr('class', 'gauge')
       .attr('x', 0)
       .attr('y', 0)
       .attr('rx', 4)
       .attr('ry', 4)
-      .attr('width', band(this.datum.value))
+      .attr('width', band(+this.datum.value))
       .attr('height', height)
       .attr('fill', () => {
         return this.colorScheme[0];
       })
+      .on("mousemove", () => {
+        // Check for custom tooltip 
+        const tooltipText = this.datum.tooltip ? this.datum.tooltip : this.datum.value;
+        tooltip
+          .style("left", `${d3.event.offsetX}px`)
+          .style("top", `${d3.event.offsetY}px`)
+          .style("display", "inline-block")
+          .html(tooltipText);
+      })
+      .on("mouseout", () => { 
+        tooltip
+          .style("display", "none");
+      });
 
   }
 

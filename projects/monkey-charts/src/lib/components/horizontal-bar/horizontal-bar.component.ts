@@ -54,6 +54,8 @@ export class HorizontalBarComponent implements AfterViewInit {
     const width = element.offsetWidth;
     const height = this.height;
 
+    d3.select(element).style('position', 'relative');
+
     // Add svg
     const svg = d3.select(element)
                   .append('svg')
@@ -98,8 +100,8 @@ export class HorizontalBarComponent implements AfterViewInit {
         // Check for custom tooltip 
         let tooltipText = d.tooltip ? d.tooltip : `${d.name}: ${d.value}`;
         tooltip
-          .style("left", `${d3.event.offsetX}px`)
-          .style("top", `${d3.event.offsetY}px`)
+          .style("left", `${d3.event.layerX}px`)
+          .style("top", `${d3.event.layerY - 35}px`)
           .style("display", "inline-block")
           .html(tooltipText);
       })

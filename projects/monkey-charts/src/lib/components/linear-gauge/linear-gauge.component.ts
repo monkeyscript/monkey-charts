@@ -57,6 +57,7 @@ export class LinearGaugeComponent implements AfterViewInit {
     const width = element.offsetWidth;
     const height = this.height;
 
+    // Add relative position to chart container
     d3.select(element).style('position', 'relative');
 
     // Add svg

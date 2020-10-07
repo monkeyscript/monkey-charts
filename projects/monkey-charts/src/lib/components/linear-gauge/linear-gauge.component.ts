@@ -17,7 +17,7 @@ export class LinearGaugeComponent implements AfterViewInit {
   @Input('datum') datum               : {
     value   : number,
     maxima  : number,
-    tooltip   ?:  string
+    tooltip   ?: string
   }
 
   constructor() { }
@@ -57,6 +57,9 @@ export class LinearGaugeComponent implements AfterViewInit {
     const width = element.offsetWidth;
     const height = this.height;
 
+    // Add relative position to chart container
+    d3.select(element).style('position', 'relative');
+
     // Add svg
     const svg = d3.select(element)
                   .append('svg')
@@ -77,7 +80,7 @@ export class LinearGaugeComponent implements AfterViewInit {
     const g = svg.append('g');
     
     // Append background rect
-    g .append('rect')
+    g.append('rect')
       .attr('x', 0)
       .attr('y', 0)
       .attr('rx', 4)
@@ -87,23 +90,10 @@ export class LinearGaugeComponent implements AfterViewInit {
       .attr('fill', () => {
         return this.colorScheme[0];
       })
-      .attr('fill-opacity', 0.2)
-      .on("mousemove", () => {
-        // Check for custom tooltip 
-        let tooltipText = this.datum.tooltip ? this.datum.tooltip : this.datum.value;
-        // tooltip
-        //   .style("left", d3.event.x + "px")
-        //   .style("top", d3.event.y + "px")
-        //   .style("display", "inline-block")
-        //   .html(tooltipText);
-      })
-      .on("mouseout", function(d){ 
-        tooltip
-          .style("display", "none");
-      });
+      .attr('fill-opacity', 0.2);
 
     // Append primary rect 
-    g .append('rect')
+    g.append('rect')
       .attr('class', 'gauge')
       .attr('x', 0)
       .attr('y', 0)
@@ -114,6 +104,19 @@ export class LinearGaugeComponent implements AfterViewInit {
       .attr('fill', () => {
         return this.colorScheme[0];
       })
+      .on("mousemove", () => {
+        // Check for custom tooltip 
+        const tooltipText = this.datum.tooltip ? this.datum.tooltip : ''+this.datum.value;
+        tooltip
+          .style("left", `${d3.event.layerX}px`)
+          .style("top", `${d3.event.layerY - 35}px`)
+          .style("display", "inline-block")
+          .html(tooltipText);
+      })
+      .on("mouseout", () => { 
+        tooltip
+          .style("display", "none");
+      });
 
   }
 

@@ -58,6 +58,9 @@ export class PieComponent implements AfterViewInit {
     const width = element.offsetWidth;
     const height = this.height;
 
+    // Add relative position to chart container
+    d3.select(element).style('position', 'relative');
+
     // Sort data 
     let datum = this.datum.sort(
       (a,b) => {
@@ -104,23 +107,22 @@ export class PieComponent implements AfterViewInit {
       })
       .attr("stroke", this.strokeColor)
       .style("stroke-width", this.strokeWidth + "px")
-      .on("mousemove", function(d){
+      .on("mousemove", (d) => {
         // Check for custom tooltip 
-        let tooltipText = d.data.tooltip ? d.data.tooltip : d.data.name + " : " + d.data.value;
-        // tooltip
-        //   .style("left", d3.event.x-500 + "px")
-        //   .style("top", d3.event.y + "px")
-        //   .style("display", "inline-block")
-        //   .html(tooltipText);
+        let tooltipText = d.data.tooltip ? d.data.tooltip : `${d.data.name}: ${d.data.value}`;
+        tooltip
+          .style("left", `${d3.event.layerX}px`)
+          .style("top", `${d3.event.layerY - 35}px`)
+          .style("display", "inline-block")
+          .html(tooltipText);
       })
-      .on("mouseout", function(d){ 
+      .on("mouseout", () => { 
         tooltip
           .style("display", "none");
       });
 
   }
 
-  //
   // On window resizing, redraw chart
   onResize(event:any) {
     this.draw();

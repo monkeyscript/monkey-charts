@@ -161,5 +161,8 @@
         }
       }
     }},
-  "defaultProject": "monkey-charts-ws"
+  "defaultProject": "monkey-charts-ws",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -21,7 +21,7 @@
     "@angular/router": "~14.2.2",
     "bootstrap": "^5.0.0",
     "d3": "^7.6.1",
-    "ng-packagr": "^14.2.1",
+    "ng-packagr": "^20.0.0",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.8"
